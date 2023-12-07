@@ -35,8 +35,14 @@ export default class News extends Component {
         super();
         this.state = {
             articles : this.articles,
-            loading : false
+            loading : true
         }
+      }
+
+      async componentDidMount(){
+            let data = await fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=8d9b7c653c95490497dd205b98cd5c5d');
+            let parsedData = await data.json();
+            this.setState({articles : parsedData.articles})
       }
 
   render() {
